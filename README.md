@@ -1,4 +1,4 @@
-# CS1: Lab 5
+# CS1: Project 1
 
 ## Setup
 1. Update the contents of *ID.txt* with your identifier (school email **without @school.edu**).
@@ -7,93 +7,137 @@
 ## How to Run Your Program
 * [**WINDOWS**]
    - In VSCode, press the play button in the top right corner (it should appear when you open a `.cpp` file). Your program should compile and run.
-   - Alternatively, open a terminal. Type `make.bat` and press return. Your program should compile and run.
+   - Alternatively, open a terminal. Type `.\make.bat` and press return. Your program should compile and run.
 * [**MAC/LINUX**]
    - Open a Terminal. Type `make` and press return. Your program should compile and run.
 
 ## Assignment Specification
-### The Elements Game
+### Combat Canoes
 * Implement this program in `main.cpp`.
-* This program will be a variation on the classic game Rock, Paper, Scissors.
-* There are four choices: Air, Water, Earth, or Fire
-* The elements interact as follows:
-   - Air *gusts* Earth (Air wins)
-   - Water *extinguishes* Fire (Water wins)
-   - Earth *absorbs* Water (Earth wins)
-   - Fire *burns* Air (Fire wins)
-   - For all other interactions, the match ends in a draw
-* *Continuously* display a menu of options and prompt the user to make a selection.
-   - `A` for Air, `W` for Water, `E` for Earth, `F` for Fire
-   - The user should be continuously prompted until they make a valid selection
-* After the user has made their selection, the program should **randomly** select another element.
-   - Randomness can be accomplished using `rand()` and `srand()` from the `<cstdlib>` library in combination with `time()` from the `<ctime>` library
-* Output a message to the terminal determining if the user has won or lost the match.
-* Lastly, after the winner is determined, the user should select whether or not to play again.
-   - `Y` to play again, or any other key to quit
+* This program will be a variation on the game Battleship.
+* The game is played on a 4x4 board.
+   - The board must be represented by a 2D array
+   - You will likely need two 2D arrays (one to represent the board state and one to represent the "solution")
+   - Unknown spaces are represented by a hashtag `#`
+   - Spaces occupied by canoes are represent by capital alphabetic letters `A, B, C`
+   - The board array is accessed using row/column indices
+* When the game starts, the board is randomly populated with exactly three canoes of random length
+   - Canoes have a maximum length of four
+   - Canoes only need to span horizontally
+   - You will need to develop an algorithm to randomly generate canoes with these restrictions
+* The user will be prompted to select a row and a column.
+   - If the selected space has already been selected OR it is outside the bounds of the board, the user should be continuosly prompted for a valid selection
+   - If the selected space contains a canoe, it should be revealed
+   - If the selected space does not contain a canoe, it should be marked with an asterisk `*`
+* The user has 5 total attempts to "hit" all the canoes. Each time the user "misses" they consume one attempt.
+* After any attempt, if all canoes have been revealed, the user wins.
+* At the end of the game (when the user wins OR all attempts have been used), all canoes should be revealed.
 
-### Function Requirements
-This starter code includes function prototypes to help you get started. Each of these functions must be defined and used in the final program. Additional helper functions should be defined if necessary.
-* `char userChoice()`
-  - Continuously prompts the user for a selection until a valid choice is made, then returns that character choice
-* `char computerChoice()`
-  - Generates a random choice (A, W, E, or F) and returns it
-* `void determineWinner(char, char)`
-  - Determines the winner of a match between two element choices and displays it
-* `bool playAgain()`
-  - Prompts the user to ask if they want to play again (returns `true`) or not (returns `false`)
+### Other Requirements
+* This starter code includes function commented prototypes to help you get started. These functions are not required.
+* Regardless if you use the provided prototypes, your program logic must be organized into functions.
+* You will be graded on code cleanliness and design.
 
 #### Example
 ```
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: G    
-Invalid selection, try again: X
-Invalid selection, try again: O
-Invalid selection, try again: A
-You chose AIR. Your opponent chose WATER. Nothing happens.
-Draw!
-Would you like to play again? (Y for yes, other key to quit): Y
-
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: A
-You chose AIR. Your opponent chose WATER. Nothing happens.
-Draw!
-Would you like to play again? (Y for yes, other key to quit): Y
-
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: A
-You chose AIR. Your opponent chose FIRE. FIRE burns AIR.
-You lose!
-Would you like to play again? (Y for yes, other key to quit): Y
-
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: W
-You chose WATER. Your opponent chose AIR. Nothing happens.
-Draw!
-Would you like to play again? (Y for yes, other key to quit): Y
-
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: W
-You chose WATER. Your opponent chose WATER. Nothing happens.
-Draw!
-Would you like to play again? (Y for yes, other key to quit): Y
-
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: E
-You chose EARTH. Your opponent chose WATER. EARTH absorbs WATER.
-You win!
-Would you like to play again? (Y for yes, other key to quit): Y
-
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: F
-You chose FIRE. Your opponent chose WATER. WATER extinguishes FIRE.
-You lose!
-Would you like to play again? (Y for yes, other key to quit): Y
-
-ELEMENTS: AIR (A), WATER (W), EARTH (E), FIRE (F)
-Select your element: F
-You chose FIRE. Your opponent chose AIR. FIRE burns AIR.
-You win!
-Would you like to play again? (Y for yes, other key to quit): Q
+COMBAT CANOES
+Try to hit all 3 canoes!
+  0 1 2 3 
+0 # # # #
+1 # # # #
+2 # # # #
+3 # # # #
+Select a row: -1
+Select a col: 3
+Invalid choice, please try again.
+Select a row: 0
+Select a col: 5
+Invalid choice, please try again.
+Select a row: 0
+Select a col: 0
+MISS!
+4 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # # #
+2 # # # #
+3 # # # #
+Select a row: 0
+Select a col: 0
+Invalid choice, please try again.
+Select a row: 1
+Select a col: 3
+HIT!
+4 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # # A
+2 # # # #
+3 # # # #
+Select a row: 1
+Select a col: 2
+HIT!
+4 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # B A
+2 # # # #
+3 # # # #
+Select a row: 2
+Select a col: 2
+HIT!
+4 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # B A
+2 # # C #
+3 # # # #
+Select a row: 3
+Select a col: 3
+MISS!
+3 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # B A
+2 # # C #
+3 # # # *
+Select a row: 3
+Select a col: 0
+MISS!
+2 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # B A
+2 # # C #
+3 * # # *
+Select a row: 2
+Select a col: 1
+HIT!
+2 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # B A
+2 # C C #
+3 * # # *
+Select a row: 2
+Select a col: 0
+MISS!
+1 attempts left.
+  0 1 2 3 
+0 * # # #
+1 # # B A
+2 * C C #
+3 * # # *
+Select a row: 0
+Select a col: 3
+MISS!
+0 attempts left.
+YOU LOSE!
+  0 1 2 3 
+0 # # # #
+1 B B B A
+2 # C C C
+3 # # # #
 ```
 
 ## Submission
