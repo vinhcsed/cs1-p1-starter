@@ -28,7 +28,7 @@ const char MISS = '*';
 
 /* Checks if a row/col selection matches the
    provided char in the 2D array */
-// bool match(char[][COLS], int x, int y, char);
+// bool match(char[][COLS], int, int, char);
 
 /* Adds a randomly generated canoe to the 2D array */
 // void addCanoe(char[][COLS], char);
