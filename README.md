@@ -34,7 +34,7 @@
 * At the end of the game (when the user wins OR all attempts have been used), all canoes should be revealed.
 
 ### Other Requirements
-* This starter code includes function commented prototypes to help you get started. These functions are not required.
+* This starter code includes commented function prototypes to help you get started. These functions are not required.
 * Regardless if you use the provided prototypes, your program logic must be organized into functions.
 * You will be graded on code cleanliness and design.
 
@@ -139,6 +139,11 @@ YOU LOSE!
 2 # C C C
 3 # # # #
 ```
+
+### Extra Credit (+25%)
+* Only attempt this extra credit portion if you have completed the main program.
+* Update your canoe generation algorithm to allow vertical canoes.
+* Write a short summary in `EXTRA.txt` describing how your algorithm works.
 
 ## Submission
 1. Remember to *commit* and *push* your changes to this repository.
